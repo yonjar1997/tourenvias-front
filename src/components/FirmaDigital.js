@@ -14,9 +14,9 @@ export const FirmaDigital = () => {
     const guardar = () => setImageURL(sigCanvas.current.getTrimmedCanvas().toDataURL("image/png"))
   return (
     <>
-        <h1>firma tourenvias </h1>
         
-        <Popup modal trigger={<button>firma aqui</button>} closeOnDocumentClick={false}>
+        
+        <Popup modal trigger={<button className="btn btn-dark fw-bold">firma aqui</button>} closeOnDocumentClick={false}>
             {close => (<>
             <SignaturePad 
             ref={sigCanvas}
