@@ -5,17 +5,46 @@ const initailForm = {
     constellation:"",
     id:null,
 }
-export const CrudForm = () => {
+export const CrudForm = ({createData, updateData, dataToEdit,setDataToEdit}) => {
 
   const [form, setForm] = useState(initailForm)
-  const handleChange = (e) => {}
+  useEffect(()=>{
+    if(dataToEdit){
+      setForm(dataToEdit);
+    }else{
+      setForm(initailForm);
+    }
+  },[dataToEdit]);
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]:e.target.value,
+    });
+  };
 
-  const handleSubmit = (e) => {}
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const handleReset = (e) => {}
+    if(!form.name || !form.constellation){
+      alert("Datos incompletos");
+      return;
+    }
+
+    if(form.id === null){
+      createData(form);
+    }else{
+      updateData(form);
+    }
+    handleReset();
+  };
+
+  const handleReset = (e) => {
+    setForm(initailForm);
+    setDataToEdit(null);
+  }
   return (
     <>
-        <h3>Agregar</h3>
+        <h3>{dataToEdit ? "Editar" : "Agregar"}</h3>
         <form onSubmit={handleSubmit} >
             <input 
             type="text" 
